@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+    <h1>Manager</h1>
+    <p>Show list of connected generators</p>
+</div>
+{% for message in messages %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <h3></h3>
+            {% if message['Apk_name']=='Aggregator'%}
+            <a class="btn btn-info btn-lg" href="{{ url_for('create2', app_id=message['ID']) }}">
+                <span class="glyphicon glyphicon-list-alt"></span> Edit
+            </a>
+            {%else%}
+            {% if message['Apk_name']=='Filter'%}
+            <a class="btn btn-info btn-lg" href="{{ url_for('create3', app_id=message['ID']) }}">
+                <span class="glyphicon glyphicon-filter"></span> Edit
+            </a>
+            {%else%}
+            {% if message['Apk_name']=='Controller'%}
+            <a class="btn btn-info btn-lg" href="{{ url_for('create4', app_id=message['ID']) }}">
+                <span class="glyphicon glyphicon-list-alt"></span> Edit
+            </a>
+            {%else%}
+            {% if message['Apk_name']=='Heater'%}
+            <a class="btn btn-info btn-lg" href="{{ url_for('create5', app_id=message['ID']) }}">
+                <span class="glyphicon glyphicon-list-alt"></span> Edit
+            </a>
+            {%else%}
+            <a class="btn btn-info btn-lg" href="{{ url_for('create', app_id=message['ID']) }}">
+                <span class="glyphicon glyphicon-cog"></span> Edit
+            </a>
+            {%endif%}
+
+            {%endif%}
+            {%endif%}
+            {%endif%}
+
+        </div>
+        <div class="col-sm-8">
+            <h3>{{ message['title'] }}</h3>
+            <p>{{ message['content'] }}</p>
+        </div>
+
+        <a class="btn btn-info btn-lg" href="{{ url_for('diagram', app_name=message['Apk_name']) }}">
+            <span class="glyphicon glyphicon-picture"></span> Diagram
+        </a>
+
+
+    </div>
+</div>
+{% endfor %}
+
+</body>
+</html>
